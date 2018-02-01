@@ -12,17 +12,17 @@ import (
 )
 
 type RequestBody struct {
-	Query     string `json:"query"`
-	Variables struct {
-	} `json:"variables"`
-	OperationName string `json:"operationName"`
+	Query          string                 `json:"query"`
+	VariableValues map[string]interface{} `json:"variables"`
+	OperationName  string                 `json:"operationName"`
 }
 
 func executeQuery(request RequestBody, schema graphql.Schema) *graphql.Result {
 	result := graphql.Do(graphql.Params{
-		Schema:        schema,
-		RequestString: request.Query,
-		OperationName: request.OperationName,
+		Schema:         schema,
+		VariableValues: request.VariableValues,
+		RequestString:  request.Query,
+		OperationName:  request.OperationName,
 	})
 
 	return result
