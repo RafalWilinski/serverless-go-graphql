@@ -11,10 +11,9 @@ provider:
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/go-graphql-users"
 
 package:
- exclude:
-   - ./**
- include:
-   - ./bin/**
+  patterns:
+    - "!./**"
+    - "./bin/**"
 
 functions:
   handler:
